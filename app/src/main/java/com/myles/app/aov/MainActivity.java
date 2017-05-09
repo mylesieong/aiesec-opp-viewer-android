@@ -1,6 +1,7 @@
 package com.myles.app.aov;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
@@ -37,10 +38,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((ListView) this.findViewById(R.id.list)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(((TextView) view.findViewById(R.id.text_url)).getText().toString()));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                }
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(((TextView) view.findViewById(R.id.text_id)).getText().toString()));
+                //if (intent.resolveActivity(getPackageManager()) != null) {
+                //    startActivity(intent);
+                //}
+                Intent intent = new Intent(MainActivity.this, OpportunityActivity.class);
+                intent.putExtra("id", ((TextView)view.findViewById(R.id.text_id)).getText().toString());
+                intent.putExtra("title", ((TextView)view.findViewById(R.id.text_title)).getText().toString());
+                intent.putExtra("company", ((TextView)view.findViewById(R.id.text_company)).getText().toString());
+                intent.putExtra("country", ((TextView)view.findViewById(R.id.text_country)).getText().toString());
+                intent.putExtra("duration", ((TextView)view.findViewById(R.id.text_duration)).getText().toString());
+                intent.putExtra("application_close_date", ((TextView)view.findViewById(R.id.text_application_close_date)).getText().toString());
+                startActivity(intent);
             }
         });
 

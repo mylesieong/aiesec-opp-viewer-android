@@ -27,6 +27,9 @@ import java.util.List;
 
 public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity>> {
 
+    final static public int DEFAULT_READ_TIMEOUT = 20000;
+    final static public int DEFAULT_CONNECTION_TIMEOUT = 30000;
+
     private URL mURL;
 
     public OpportunityAsyncTaskLoader(Context context, URL url) {
@@ -37,7 +40,7 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
     @Override
     public List<Opportunity> loadInBackground() {
         Log.v("MylesDebug", "Loader- loadInBackground");
-        ConnectivityManager connectivityManager = (ConnectivityManager)this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo == null || !networkInfo.isConnected()) {
             return null;
@@ -51,8 +54,8 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(DEFAULT_READ_TIMEOUT);
+            urlConnection.setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT);
             urlConnection.connect();
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
@@ -84,12 +87,6 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
         this.forceLoad();
     }
 
-    /**
-     * Support method
-     * @param inputStream
-     * @return
-     * @throws IOException
-     */
     private String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -104,11 +101,6 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
         return output.toString();
     }
 
-    /**
-     * Support method
-     * @param json
-     * @return
-     */
     private List<Opportunity> extractFeatureFromJson(String json) {
         ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
         try {
@@ -118,14 +110,13 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
             // If there are results in the features array
             for (int i = 0; i < featureArray.length(); i++) {
                 JSONObject properties = featureArray.getJSONObject(i);
-                String title = properties.getString("title");
-                String publisher = properties.getString("title");
-                String url = properties.getString("title");
-
                 Opportunity opportunity = new Opportunity();
-                opportunity.setTitle(title);
-                opportunity.setPublisher(publisher);
-                opportunity.setURL(url);
+                opportunity.setId(properties.getInt("id"));
+                opportunity.setTitle(properties.getString("title"));
+                opportunity.setCompany(properties.getJSONObject("branch").getString("name"));
+                opportunity.setCountry(properties.getJSONObject("office").getString("country"));
+                opportunity.setDuration(properties.getInt("duration"));
+                opportunity.setApplicationCloseDate(properties.getString("applications_close_date"));
                 opportunities.add(opportunity);
             }
 
