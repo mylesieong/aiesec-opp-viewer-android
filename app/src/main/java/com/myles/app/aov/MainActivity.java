@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,10 +23,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Opportunity>> {
 
     private static final int OPPS_LOADER = 1;
+    
+    private static final int GEP_IN_LOAD = 1;
+    private static final int US_IN_LOAD = 2;
+    private static final int CA_IN_LOAD = 3;
+    private static final int DEV_IN_LOAD = 4;
 
-    private static final String GIS_API_URL_BASE =
-            "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters%5Bis_gep%5D=true&per_page=1000&only=data";
-
+    private static final String GIS_API_URL_GEP = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters%5Bis_gep%5D=true&per_page=1000&only=data";
+    private static final String GIS_API_URL_US = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1621&filters[programmes][]=2&per_page=1000&only-data";
+    private static final String GIS_API_URL_CA = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1554&filters[programmes][]=2&per_page=1000&only-data";
+    private static final String GIS_API_URL_DEV = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&q=developer&per_page=1000&only=data";
+                        
+    private int mInLoadIndicator;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +45,62 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         final LoaderManager loaderManager = getLoaderManager();
         //loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+<<<<<<< HEAD
         ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new View.OnClickListener() {
+=======
+        /* GEP Search Button Setup */
+        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new OnClickListener() {
+>>>>>>> 72fdde09dbc3a41ebc62653af920b4790f2c8530
             @Override
             public void onClick(View arg0) {
-                loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+                MainActivity.this.mInLoadIndicator = GEP_IN_LOAD;
+                if ( loaderManager.getLoader(OPPS_LOADER) == null ){
+                    loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+                }else{
+                    loaderManager.restartLoader(OPPS_LOADER, null, MainActivity.this);
+                }
             }
         });
-
+        
+        /* US Search Button Setup */
+        ((Button) this.findViewById(R.id.button_us)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = US_IN_LOAD;
+                if ( loaderManager.getLoader(OPPS_LOADER) == null ){
+                    loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+                }else{
+                    loaderManager.restartLoader(OPPS_LOADER, null, MainActivity.this);
+                }
+            }
+        });
+        
+        /* CA Search Button Setup */
+        ((Button) this.findViewById(R.id.button_ca)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = CA_IN_LOAD;
+                if ( loaderManager.getLoader(OPPS_LOADER) == null ){
+                    loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+                }else{
+                    loaderManager.restartLoader(OPPS_LOADER, null, MainActivity.this);
+                }
+            }
+        });
+        
+        /* DEV Search Button Setup */
+        ((Button) this.findViewById(R.id.button_developer)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = DEV_IN_LOAD;
+                if ( loaderManager.getLoader(OPPS_LOADER) == null ){
+                    loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+                }else{
+                    loaderManager.restartLoader(OPPS_LOADER, null, MainActivity.this);
+                }
+            }
+        });
+        
         ((ListView) this.findViewById(R.id.list)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -69,24 +128,25 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<Opportunity>> onCreateLoader(int id, Bundle args) {
         Log.v("MylesDebug", "onCreateLoader");
+        /* Debug: assumne id = OPPS_LOADER so no chekcing */
         URL searchUrl = null;
         try {
-            searchUrl = new URL(GIS_API_URL_BASE);
+            searchUrl = new URL(this.getInLoadURL());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        // 为给定 URL 创建新 loader
         return new OpportunityAsyncTaskLoader(this, searchUrl);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Opportunity>> loader, List<Opportunity> newses) {
+    public void onLoadFinished(Loader<List<Opportunity>> loader, List<Opportunity> opportunities) {
         Log.v("MylesDebug", "onLoadFinished");
-        if (newses == null) {
+        if (opportunities == null) {
+            Toast.makeText(this, "fail to refresh", Toast.LENGTH_SHORT).show();
             return;
         }
-        OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, newses);
+        OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);
         ((ListView) findViewById(R.id.list)).setAdapter(adapter);
         if (((SwipeRefreshLayout) findViewById(R.id.swiperefresh)).isRefreshing()) {
             ((SwipeRefreshLayout) findViewById(R.id.swiperefresh)).setRefreshing(false);
@@ -96,6 +156,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<Opportunity>> loader) {
         Log.v("MylesDebug", "onResetLoader");
-        // empty the list in main activity
+        /* Debug: assumne id = OPPS_LOADER so no chekcing */
+        /* This method is followed by a new call to onCreateLoader so the URL will
+         * be selected again by getInLoadURL() method 
+         */
+    }
+    
+    private String getInLoadURL(){
+        String urlString = "";
+        if ( this.mInLoadIndicator = GEP_IN_LOAD ){ 
+            urlString = GIS_API_URL_GEP; 
+        }else if (this.mInLoadIndicator = US_IN_LOAD){ 
+            urlString = GIS_API_URL_US; 
+        }else if (this.mInLoadIndicator = CA_IN_LOAD){ 
+            urlString = GIS_API_URL_CA; 
+        }else if (this.mInLoadIndicator = DEV_IN_LOAD){ 
+            urlString = GIS_API_URL_DEV; 
+        } 
+        return urlString;
     }
 }

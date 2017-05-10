@@ -1,16 +1,5 @@
 package com.myles.app.aov;
 
-import android.content.AsyncTaskLoader;
-import android.content.Context;
-import android.graphics.Path;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +10,16 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by asus on 9/5/2017.
- */
+import android.content.AsyncTaskLoader;
+import android.content.Context;
+import android.graphics.Path;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity>> {
 
