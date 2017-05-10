@@ -92,6 +92,7 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             setAllDetailViewsText("No result.");
         }
         
+        /* Debug temp set all as string to avoid type problem */
         ((TextView)findViewById(R.id.text_views)).setText(opportunity.getHomeLC());
         ((TextView)findViewById(R.id.text_home_lc)).setText(opportunity.getHomeLC());
         ((TextView)findViewById(R.id.text_managers)).setText(opportunity.getHomeLC());
