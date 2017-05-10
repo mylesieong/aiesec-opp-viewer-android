@@ -45,12 +45,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         final LoaderManager loaderManager = getLoaderManager();
         //loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
-<<<<<<< HEAD
-        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new View.OnClickListener() {
-=======
+
         /* GEP Search Button Setup */
-        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new OnClickListener() {
->>>>>>> 72fdde09dbc3a41ebc62653af920b4790f2c8530
+        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 MainActivity.this.mInLoadIndicator = GEP_IN_LOAD;
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
         
         /* US Search Button Setup */
-        ((Button) this.findViewById(R.id.button_us)).setOnClickListener(new OnClickListener() {
+        ((Button) this.findViewById(R.id.button_us)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 MainActivity.this.mInLoadIndicator = US_IN_LOAD;
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
         
         /* CA Search Button Setup */
-        ((Button) this.findViewById(R.id.button_ca)).setOnClickListener(new OnClickListener() {
+        ((Button) this.findViewById(R.id.button_ca)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 MainActivity.this.mInLoadIndicator = CA_IN_LOAD;
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
         
         /* DEV Search Button Setup */
-        ((Button) this.findViewById(R.id.button_developer)).setOnClickListener(new OnClickListener() {
+        ((Button) this.findViewById(R.id.button_developer)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 MainActivity.this.mInLoadIndicator = DEV_IN_LOAD;
@@ -142,15 +139,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<Opportunity>> loader, List<Opportunity> opportunities) {
         Log.v("MylesDebug", "onLoadFinished");
-        if (opportunities == null) {
-            Toast.makeText(this, "fail to refresh", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);
-        ((ListView) findViewById(R.id.list)).setAdapter(adapter);
+
         if (((SwipeRefreshLayout) findViewById(R.id.swiperefresh)).isRefreshing()) {
             ((SwipeRefreshLayout) findViewById(R.id.swiperefresh)).setRefreshing(false);
         }
+
+        if ( opportunities == null || opportunities.size() == 0 ) {
+            Toast.makeText(this, "fail to load", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);
+        ((ListView) findViewById(R.id.list)).setAdapter(adapter);
+
     }
 
     @Override
@@ -164,13 +165,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     
     private String getInLoadURL(){
         String urlString = "";
-        if ( this.mInLoadIndicator = GEP_IN_LOAD ){ 
+        if ( this.mInLoadIndicator == GEP_IN_LOAD ){
             urlString = GIS_API_URL_GEP; 
-        }else if (this.mInLoadIndicator = US_IN_LOAD){ 
+        }else if (this.mInLoadIndicator == US_IN_LOAD){
             urlString = GIS_API_URL_US; 
-        }else if (this.mInLoadIndicator = CA_IN_LOAD){ 
+        }else if (this.mInLoadIndicator == CA_IN_LOAD){
             urlString = GIS_API_URL_CA; 
-        }else if (this.mInLoadIndicator = DEV_IN_LOAD){ 
+        }else if (this.mInLoadIndicator == DEV_IN_LOAD){
             urlString = GIS_API_URL_DEV; 
         } 
         return urlString;

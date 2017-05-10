@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -89,6 +90,7 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
     public void onLoadFinished(Loader<Opportunity> loader, Opportunity opportunity) {
         Log.v("MylesDebug", "Opportunity: onLoadFinished");
         if (opportunity == null) {
+            Toast.makeText(this, "fail to refresh", Toast.LENGTH_SHORT).show();
             setAllDetailViewsText("No result.");
         }
         
