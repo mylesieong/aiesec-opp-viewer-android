@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         final LoaderManager loaderManager = getLoaderManager();
         //loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
-        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new OnClickListener() {
+        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
