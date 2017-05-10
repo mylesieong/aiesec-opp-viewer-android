@@ -27,6 +27,9 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
 
     private static final String GIS_API_URL_SUFFIX = ".json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493";
 
+    /* the id of opportunity*/
+    private String mId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
         String country = intent.getExtras().getString("country");
         String duration = intent.getExtras().getString("duration");
         String applicationCloseDate = intent.getExtras().getString("application_close_date");
+
+        this.mId = id;
 
         ((TextView)findViewById(R.id.text_id)).setText(id);
         ((TextView)findViewById(R.id.text_title)).setText(title);
@@ -77,7 +82,7 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
         Log.v("MylesDebug", "Opportunity: onCreateLoader");
         URL searchUrl = null;
         try {
-            searchUrl = new URL(GIS_API_URL_PREFIX + "845422" + GIS_API_URL_SUFFIX);
+            searchUrl = new URL(GIS_API_URL_PREFIX + this.mId + GIS_API_URL_SUFFIX);
         } catch (MalformedURLException e) {
             setAllDetailViewsText("URL Not Parsed");
         }
