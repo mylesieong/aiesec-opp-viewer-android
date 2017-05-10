@@ -33,15 +33,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((ListView) this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
 
         final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+        //loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+        ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+            }
+        });
 
         ((ListView) this.findViewById(R.id.list)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(((TextView) view.findViewById(R.id.text_id)).getText().toString()));
-                //if (intent.resolveActivity(getPackageManager()) != null) {
-                //    startActivity(intent);
-                //}
                 Intent intent = new Intent(MainActivity.this, OpportunityActivity.class);
                 intent.putExtra("id", ((TextView)view.findViewById(R.id.text_id)).getText().toString());
                 intent.putExtra("title", ((TextView)view.findViewById(R.id.text_title)).getText().toString());
