@@ -21,10 +21,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Opportunity>> {
 
     private static final int OPPS_LOADER = 1;
+    
+    private static final int GEP_IN_LOAD = 1;
+    private static final int US_IN_LOAD = 2;
+    private static final int CA_IN_LOAD = 3;
+    private static final int DEV_IN_LOAD = 4;
 
-    private static final String GIS_API_URL_BASE =
-            "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters%5Bis_gep%5D=true&per_page=1000&only=data";
-
+    private static final String GIS_API_URL_GEP = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters%5Bis_gep%5D=true&per_page=1000&only=data";
+    private static final String GIS_API_URL_US = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1621&filters[programmes][]=2&per_page=1000&only-data";
+    private static final String GIS_API_URL_CA = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1554&filters[programmes][]=2&per_page=1000&only-data";
+    private static final String GIS_API_URL_DEV = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&q=developer&per_page=1000&only=data";
+                        
+    private int mInLoadIndicator;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +43,42 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         final LoaderManager loaderManager = getLoaderManager();
         //loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+        /* GEP Search Button Setup */
         ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = GEP_IN_LOAD;
                 loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
             }
         });
-
+        
+        /* US Search Button Setup */
+        ((Button) this.findViewById(R.id.button_us)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = US_IN_LOAD;
+                loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+            }
+        });
+        
+        /* CA Search Button Setup */
+        ((Button) this.findViewById(R.id.button_ca)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = CA_IN_LOAD;
+                loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+            }
+        });
+        
+        /* DEV Search Button Setup */
+        ((Button) this.findViewById(R.id.button_developer)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MainActivity.this.mInLoadIndicator = DEV_IN_LOAD;
+                loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
+            }
+        });
+        
         ((ListView) this.findViewById(R.id.list)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -70,7 +108,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Log.v("MylesDebug", "onCreateLoader");
         URL searchUrl = null;
         try {
-            searchUrl = new URL(GIS_API_URL_BASE);
+            
+            if ( this.mInLoadIndicator = GEP_IN_LOAD ){
+                searchUrl = new URL(GIS_API_URL_GEP);
+            }else if (this.mInLoadIndicator = US_IN_LOAD){
+                searchUrl = new URL(GIS_API_URL_US);
+            }else if (this.mInLoadIndicator = CA_IN_LOAD){
+                searchUrl = new URL(GIS_API_URL_CA);
+            }else if (this.mInLoadIndicator = DEV_IN_LOAD){
+                searchUrl = new URL(GIS_API_URL_DEV);
+            }
+            
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
