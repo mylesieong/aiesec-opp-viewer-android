@@ -32,7 +32,7 @@ public class OpportunityAdapter extends ArrayAdapter<Opportunity> {
         ((TextView) listItemView.findViewById(R.id.text_company)).setText(currentOpportunity.getCompany());
         ((TextView) listItemView.findViewById(R.id.text_country)).setText(currentOpportunity.getCountry());
         ((TextView) listItemView.findViewById(R.id.text_duration)).setText(String.valueOf(currentOpportunity.getDuration()) + "wks");
-        ((TextView) listItemView.findViewById(R.id.text_application_close_date)).setText(currentOpportunity.getApplicationCloseDate());
+        ((TextView) listItemView.findViewById(R.id.text_application_close_date)).setText(parseDate(currentOpportunity.getApplicationCloseDate()));
 
         return listItemView;
     }
