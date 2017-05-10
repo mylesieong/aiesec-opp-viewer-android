@@ -6,64 +6,311 @@
     android:orientation="vertical"
     tools:context=".OpportunityActivity">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:strechColumns="1">
 
-        <TextView
-            android:id="@+id/text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!--id -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="ID:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_id"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!--Title -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Title:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_title"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- Company -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Company:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_company"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- Duration -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Duration:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_duration"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>        
+        
+        
+        <!-- Country -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Country:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_country"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- application close date -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="App Close Date:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_application_close_date"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- Seperator between brief and detail -->
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        
+        <!-- views -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Views:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_views"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- home LC -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Home LC:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_home_lc"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>      
+        
+        <!-- Managers -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Managers:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_managers"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+        <!-- Skills -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Skills:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_skills"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>       
 
-        <TextView
-            android:id="@+id/text_company"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!-- Backgrounds -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Backgrounds:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_backgrounds"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/text_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!-- visa link  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Visa Link:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_visa_link"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/text_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+        <!-- visa type  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Visa Type:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_visa_type"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/text_application_close_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
+        <!-- visa duration  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Visa Duration:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_visa_duration"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- City  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="City:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_city"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- SelectProcess  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Select Process:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_select_process"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- Salary  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Salary:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_salary"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- Salary Ccy  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Salary Ccy:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_salary_ccy"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- Salary Ccy Code -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Salary Ccy Code:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_salary_ccy_code"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- Create time  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Create Time:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_create_time"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- Update time  -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Update Time:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_update_time"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+        
+    </TableLayout>
 
 </ScrollView>
