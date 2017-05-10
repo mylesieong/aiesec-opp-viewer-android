@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<Opportunity>> onCreateLoader(int id, Bundle args) {
         Log.v("MylesDebug", "onCreateLoader");
+        ((ListView) this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+        Toast.makeText(this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
         /* Debug: assumne id = OPPS_LOADER so no chekcing */
         URL searchUrl = null;
         try {
@@ -176,4 +178,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } 
         return urlString;
     }
+
+    private String getInLoadItemName(){
+        String itemName = "";
+        if ( this.mInLoadIndicator == GEP_IN_LOAD ){
+            itemName = "GEP";
+        }else if (this.mInLoadIndicator == US_IN_LOAD){
+            itemName = "US";
+        }else if (this.mInLoadIndicator == CA_IN_LOAD){
+            itemName = "CA";
+        }else if (this.mInLoadIndicator == DEV_IN_LOAD){
+            itemName = "DEV";
+        }
+        return itemName;
+    }
+
 }
