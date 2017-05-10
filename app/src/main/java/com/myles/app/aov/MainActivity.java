@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -137,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<List<Opportunity>> loader, List<Opportunity> opportunities) {
         Log.v("MylesDebug", "onLoadFinished");
         if (opportunities == null) {
+            Toast.makeText(this, "fail to refresh", Toast.LENGTH_SHORT).show();
             return;
         }
         OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);
