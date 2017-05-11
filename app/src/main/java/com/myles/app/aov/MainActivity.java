@@ -2,6 +2,7 @@ package com.myles.app.aov;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
@@ -156,20 +157,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
            
             /* Load Failed: Use file data instead */
             try{
-                FileInputStream fis = openFileInput(getInLoadItemName);
+                FileInputStream fis = openFileInput(getInLoadItemName());
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 opportunities = (List<Opportunity>)ois.readObject();
             } 
-            catch (IOException ioe) { 
-                ioe.printStackTrace(); 
+            catch (Exception e) {
+                e.printStackTrace();
             }
 
         }else {
             /* Load Success: update result to file */
+            Toast.makeText(this, "Load lastest info success, save to file", Toast.LENGTH_SHORT).show();
             try {
-                FileOutputStream fos = openFileOutput(getInLoadItemName, Context.MODE_PRIVATE);
-                Objectoutputstream oos = new ObjectOutputStream(fos);
-                oos.writeObject(si);
+                FileOutputStream fos = openFileOutput(getInLoadItemName(), Context.MODE_PRIVATE);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(opportunities);
                 oos.close();
                 fos.close();
             }catch (IOException ioe){
