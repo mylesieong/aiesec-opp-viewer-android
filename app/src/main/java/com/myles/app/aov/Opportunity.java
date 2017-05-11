@@ -2,12 +2,13 @@ package com.myles.app.aov;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by asus on 9/5/2017.
  */
 
-public class Opportunity {
+public class Opportunity implements Serializable {
 
     public String getApplicationCloseDate() {
         return applicationCloseDate;

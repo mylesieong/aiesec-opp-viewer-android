@@ -19,6 +19,11 @@ import android.widget.Toast;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Opportunity>> {
 
@@ -147,10 +152,32 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         if ( opportunities == null || opportunities.size() == 0 ) {
-            Toast.makeText(this, "fail to load", Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(this, "fail to load, use last result", Toast.LENGTH_SHORT).show();
+           
+            /* Load Failed: Use file data instead */
+            try{
+                FileInputStream fis = openFileInput(getInLoadItemName);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                opportunities = (List<Opportunity>)ois.readObject();
+            } 
+            catch (IOException ioe) { 
+                ioe.printStackTrace(); 
+            }
+
+        }else {
+            /* Load Success: update result to file */
+            try {
+                FileOutputStream fos = openFileOutput(getInLoadItemName, Context.MODE_PRIVATE);
+                Objectoutputstream oos = new ObjectOutputStream(fos);
+                oos.writeObject(si);
+                oos.close();
+                fos.close();
+            }catch (IOException ioe){
+                ioe.printStackTrace();
+            }
         }
 
+        /* No matter success or fail: Present the result */
         OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);
         ((ListView) findViewById(R.id.list)).setAdapter(adapter);
 
