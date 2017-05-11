@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -178,6 +180,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 ioe.printStackTrace();
             }
         }
+
+        /* Sort the opportunities according to update_at */
+        Collections.sort(opportunities, new Comparator<Opportunity>() {
+            @Override
+            public int compare(Opportunity o1, Opportunity o2) {
+                return o1.getApplicationCloseDate().compareTo(o2.getApplicationCloseDate());  //Let recent close go top
+            }
+        });
 
         /* No matter success or fail: Present the result */
         OpportunityAdapter adapter = new OpportunityAdapter(MainActivity.this, opportunities);

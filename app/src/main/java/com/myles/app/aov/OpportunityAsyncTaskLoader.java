@@ -15,6 +15,8 @@ import android.content.Context;
 import android.graphics.Path;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -23,8 +25,8 @@ import org.json.JSONObject;
 
 public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity>> {
 
-    final static public int DEFAULT_READ_TIMEOUT = 5000;
-    final static public int DEFAULT_CONNECTION_TIMEOUT = 5000;
+    final static public int DEFAULT_READ_TIMEOUT = 10000;
+    final static public int DEFAULT_CONNECTION_TIMEOUT = 10000;
 
     private URL mURL;
 
@@ -33,6 +35,7 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
         this.mURL = url;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public List<Opportunity> loadInBackground() {
         Log.v("MylesDebug", "Loader- loadInBackground");
@@ -74,6 +77,7 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
         }
 
         List<Opportunity> opportunities = extractFeatureFromJson(jsonResponse);
+
         return opportunities;
     }
 
