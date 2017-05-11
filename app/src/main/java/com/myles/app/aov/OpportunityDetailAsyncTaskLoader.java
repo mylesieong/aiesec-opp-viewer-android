@@ -25,8 +25,8 @@ import com.myles.app.aov.Opportunity.*;
 
 public class OpportunityDetailAsyncTaskLoader extends AsyncTaskLoader<Opportunity> {
 
-    final static public int DEFAULT_READ_TIMEOUT = 20000;
-    final static public int DEFAULT_CONNECTION_TIMEOUT = 30000;
+    final static public int DEFAULT_READ_TIMEOUT = 5000;
+    final static public int DEFAULT_CONNECTION_TIMEOUT = 5000;
 
     private URL mURL;
 
