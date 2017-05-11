@@ -203,6 +203,16 @@ public class Opportunity implements Serializable {
     private String createTime;
     private String updateTime;
 
+    public boolean isEmpty() {
+        // Only check Brief infos
+        return id == 0
+                && title == null
+                && company == null
+                && duration == 0
+                && country == null
+                && applicationCloseDate == null;
+    }
+
     public static class Manager {
 
         private String fullName;

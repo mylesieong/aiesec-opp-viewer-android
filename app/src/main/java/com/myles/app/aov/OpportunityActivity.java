@@ -1,5 +1,6 @@
 package com.myles.app.aov;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -94,11 +100,34 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
     @Override
     public void onLoadFinished(Loader<Opportunity> loader, Opportunity opportunity) {
         Log.v("MylesDebug", "Opportunity: onLoadFinished");
-        if (opportunity == null) {
-            Toast.makeText(this, "fail to refresh", Toast.LENGTH_SHORT).show();
-            setAllDetailViewsText("No result.");
+        if (opportunity == null  || opportunity.isEmpty() ) {
+            Toast.makeText(this, "fail to load, use last result", Toast.LENGTH_SHORT).show();
+            /* Load Failed: Use file data instead */
+            try{
+                FileInputStream fis = openFileInput("OPP" + String.valueOf(this.mId) );
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                opportunity = (Opportunity)ois.readObject();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Here we go");
+            System.out.println(opportunity);
+
+        }else {
+            /* Load Success: update result to file */
+            Toast.makeText(this, "Load lastest info success, save to file", Toast.LENGTH_SHORT).show();
+            try {
+                FileOutputStream fos = openFileOutput("OPP" + String.valueOf(this.mId), Context.MODE_PRIVATE);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(opportunity);
+                oos.close();
+                fos.close();
+            }catch (IOException ioe){
+                ioe.printStackTrace();
+            }
         }
-        
+
         /* Debug temp set all as string to avoid type problem */
         ((TextView)findViewById(R.id.text_views)).setText(String.valueOf(opportunity.getViews()));
         ((TextView)findViewById(R.id.text_home_lc)).setText(opportunity.getHomeLC());
