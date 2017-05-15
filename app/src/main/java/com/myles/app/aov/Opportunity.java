@@ -47,7 +47,7 @@ public class Opportunity implements Serializable {
         this.company  = STRING_EMPTY;
         this.duration= INT_EMPTY;
         this.country = STRING_EMPTY;
-        this.applicationCloseDate
+        this.applicationCloseDate = STRING_EMPTY;
 
         this.views= INT_EMPTY;
         this.homeLC = STRING_EMPTY;
