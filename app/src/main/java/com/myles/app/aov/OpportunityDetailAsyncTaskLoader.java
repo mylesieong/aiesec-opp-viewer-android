@@ -126,6 +126,10 @@ public class OpportunityDetailAsyncTaskLoader extends AsyncTaskLoader<Opportunit
             opportunity.setSalaryCcyCode(properties.getJSONObject("specifics_info").getJSONObject("salary_currency").getInt("numeric_code"));
             opportunity.setCreateTime(properties.getString("created_at"));
             opportunity.setUpdateTime(properties.getString("updated_at"));
+            //newly add 3 fields
+            opportunity.setDescription(properties.getString("description"));
+            opportunity.setAdditional(properties.getJSONObject("role_info").getString("additional_instructions"));
+            opportunity.setPreparation(properties.getJSONObject("role_info").getString("required_preparation"));
 			
 			/* Read managers */
 			JSONArray managersJson = properties.getJSONArray("managers");
