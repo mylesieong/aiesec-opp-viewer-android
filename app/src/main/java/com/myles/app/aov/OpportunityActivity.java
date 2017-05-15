@@ -152,9 +152,9 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             ((TextView)findViewById(R.id.text_additional)).setText(opportunity.getAdditional());
 
             /* Parse n managers to string */
-            StringBuilder managersStringBuilder;
+            StringBuilder managersStringBuilder = new StringBuilder();
             for (int i = 0; i < opportunity.getManagers().size(); i++ ){
-                Manager m = opportunity.getManagers().get(i);
+                Opportunity.Manager m = opportunity.getManagers().get(i);
                 managersStringBuilder.append(m.getFullName());
                 managersStringBuilder.append("/");
                 managersStringBuilder.append(m.getEmail());
@@ -163,9 +163,9 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             ((TextView)findViewById(R.id.text_managers)).setText(managersStringBuilder.toString());
 
             /* Parse n skills to string */
-            StringBuilder skillsStringBuilder;
+            StringBuilder skillsStringBuilder = new StringBuilder();
             for (int i = 0; i < opportunity.getSkills().size(); i++ ){
-                Skill s = opportunity.getSkills().get(i);
+                Opportunity.Skill s = opportunity.getSkills().get(i);
                 skillsStringBuilder.append(s.getName());
                 skillsStringBuilder.append("/");
                 skillsStringBuilder.append(s.getOption());
@@ -176,9 +176,9 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             ((TextView)findViewById(R.id.text_skills)).setText(skillsStringBuilder.toString());
 
             /* Parse n backgrounds to string */
-            StringBuilder backgroundsStringBuilder;
+            StringBuilder backgroundsStringBuilder = new StringBuilder();
             for (int i = 0; i < opportunity.getBackgrounds().size(); i++ ){
-                Background b = opportunity.getBackgrounds().get(i);
+                Opportunity.Background b = opportunity.getBackgrounds().get(i);
                 backgroundsStringBuilder.append(b.getName());
                 backgroundsStringBuilder.append("/");
                 backgroundsStringBuilder.append(b.getOption());

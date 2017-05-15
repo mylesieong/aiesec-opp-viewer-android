@@ -55,9 +55,9 @@ public class Opportunity implements Serializable {
 
         this.views= INT_EMPTY;
         this.homeLC = STRING_EMPTY;
-        this.managers = LIST_EMPTY;
-        this.skills = LIST_EMPTY;
-        this.backgrounds = LIST_EMPTY;
+//        this.managers = LIST_EMPTY;
+//        this.skills = LIST_EMPTY;
+//        this.backgrounds = LIST_EMPTY;
         this.visaLink = STRING_EMPTY;
         this.visaType = STRING_EMPTY;
         this.visaDuration = STRING_EMPTY;
