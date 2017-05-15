@@ -100,6 +100,7 @@ public class OpportunityDetailAsyncTaskLoader extends AsyncTaskLoader<Opportunit
     }
 
     private Opportunity extractFeatureFromJson(String json) {
+        Log.v("MylesDebug", "OpportunityDetail: json content->" + json);
         Opportunity opportunity = new Opportunity();
         try {
             JSONObject properties = new JSONObject(json);
@@ -113,7 +114,7 @@ public class OpportunityDetailAsyncTaskLoader extends AsyncTaskLoader<Opportunit
 
             /* Detail member */
             /* Debug Suppose all type are well-set and should compate wo converting type */
-            opportunity.setViews(properties.getInt("views"));
+            //opportunity.setViews(properties.getInt("views"));
             opportunity.setApplicationCloseDate(properties.getString("applications_close_date"));
             opportunity.setHomeLC(properties.getJSONObject("home_lc").getString("full_name"));
             opportunity.setVisaLink(properties.getJSONObject("legal_info").getString("visa_link"));

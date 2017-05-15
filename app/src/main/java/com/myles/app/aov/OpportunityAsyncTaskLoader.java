@@ -102,6 +102,7 @@ public class OpportunityAsyncTaskLoader extends AsyncTaskLoader<List<Opportunity
     }
 
     private List<Opportunity> extractFeatureFromJson(String json) {
+        Log.v("MylesDebug", "Main: json content->" + json);
         ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
         try {
             JSONObject baseJsonResponse = new JSONObject(json);
