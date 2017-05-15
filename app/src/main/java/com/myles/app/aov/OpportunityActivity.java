@@ -109,6 +109,7 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
                 opportunity = (Opportunity)ois.readObject();
             }
             catch (Exception e) {
+                Toast.makeText(this, "Unfortunately, no cached result", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             System.out.println("Here we go");
@@ -128,23 +129,27 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             }
         }
 
-        /* Debug temp set all as string to avoid type problem */
-        ((TextView)findViewById(R.id.text_views)).setText(String.valueOf(opportunity.getViews()));
-        ((TextView)findViewById(R.id.text_home_lc)).setText(opportunity.getHomeLC());
-        ((TextView)findViewById(R.id.text_visa_link)).setText(opportunity.getVisaLink());
-        ((TextView)findViewById(R.id.text_visa_type)).setText(opportunity.getVisaType());
-        ((TextView)findViewById(R.id.text_visa_duration)).setText(opportunity.getVisaDuration());
-        ((TextView)findViewById(R.id.text_city)).setText(opportunity.getCity());
-        ((TextView)findViewById(R.id.text_select_process)).setText(opportunity.getSelectProcess());
-        ((TextView)findViewById(R.id.text_salary)).setText(String.valueOf(opportunity.getSalary()));
-        ((TextView)findViewById(R.id.text_salary_ccy)).setText(opportunity.getSalaryCcy());
-        ((TextView)findViewById(R.id.text_salary_ccy_code)).setText(String.valueOf(opportunity.getSalaryCcyCode()));
-        ((TextView)findViewById(R.id.text_create_time)).setText(opportunity.getCreateTime());
-        ((TextView)findViewById(R.id.text_update_time)).setText(opportunity.getUpdateTime());
 
-        ((TextView)findViewById(R.id.text_managers)).setText(opportunity.getHomeLC());
-        ((TextView)findViewById(R.id.text_skills)).setText(opportunity.getHomeLC());
-        ((TextView)findViewById(R.id.text_backgrounds)).setText(opportunity.getHomeLC());
+        if (opportunity != null  && !opportunity.isEmpty() ) { //since opp can still be empty if no cached file
+            /* Debug temp set all as string to avoid type problem */
+            ((TextView)findViewById(R.id.text_views)).setText(String.valueOf(opportunity.getViews()));
+            ((TextView)findViewById(R.id.text_home_lc)).setText(opportunity.getHomeLC());
+            ((TextView)findViewById(R.id.text_visa_link)).setText(opportunity.getVisaLink());
+            ((TextView)findViewById(R.id.text_visa_type)).setText(opportunity.getVisaType());
+            ((TextView)findViewById(R.id.text_visa_duration)).setText(opportunity.getVisaDuration());
+            ((TextView)findViewById(R.id.text_city)).setText(opportunity.getCity());
+            ((TextView)findViewById(R.id.text_select_process)).setText(opportunity.getSelectProcess());
+            ((TextView)findViewById(R.id.text_salary)).setText(String.valueOf(opportunity.getSalary()));
+            ((TextView)findViewById(R.id.text_salary_ccy)).setText(opportunity.getSalaryCcy());
+            ((TextView)findViewById(R.id.text_salary_ccy_code)).setText(String.valueOf(opportunity.getSalaryCcyCode()));
+            ((TextView)findViewById(R.id.text_create_time)).setText(opportunity.getCreateTime());
+            ((TextView)findViewById(R.id.text_update_time)).setText(opportunity.getUpdateTime());
+
+            ((TextView)findViewById(R.id.text_managers)).setText(opportunity.getHomeLC());
+            ((TextView)findViewById(R.id.text_skills)).setText(opportunity.getHomeLC());
+            ((TextView)findViewById(R.id.text_backgrounds)).setText(opportunity.getHomeLC());
+        }
+
     }
 
     @Override

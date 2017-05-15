@@ -10,6 +10,75 @@ import java.io.Serializable;
 
 public class Opportunity implements Serializable {
 
+    private final static int INT_EMPTY = 0;
+    private final static String STRING_EMPTY = null;
+    private final static List LIST_EMPTY = null;
+
+    /* Brief */
+    private int id;
+    private String title;
+    private String company;
+    private int duration;
+    private String country;
+    private String applicationCloseDate;
+
+    /* Details */
+    private int views;
+    private String homeLC;
+    private List<Manager> managers = new ArrayList<Manager>();
+    private List<Skill> skills = new ArrayList<Skill>();
+    private List<Background> backgrounds = new ArrayList<Background>();
+    private String visaLink;
+    private String visaType;
+    private String visaDuration;
+    private String city;
+    private String selectProcess;
+    private int salary;
+    private String salaryCcy;
+    private int salaryCcyCode;
+    private String createTime;
+    private String updateTime;
+
+    /* Constructor */
+    public Opportunity(){
+
+        this.id = INT_EMPTY;
+        this.title = STRING_EMPTY;
+        this.company  = STRING_EMPTY;
+        this.duration= INT_EMPTY;
+        this.country = STRING_EMPTY;
+        this.applicationCloseDate
+
+        this.views= INT_EMPTY;
+        this.homeLC = STRING_EMPTY;
+        this.managers = LIST_EMPTY;
+        this.skills = LIST_EMPTY;
+        this.backgrounds = LIST_EMPTY;
+        this.visaLink = STRING_EMPTY;
+        this.visaType = STRING_EMPTY;
+        this.visaDuration = STRING_EMPTY;
+        this.city = STRING_EMPTY;
+        this.selectProcess = STRING_EMPTY;
+        this.salary= INT_EMPTY;
+        this.salaryCcy = STRING_EMPTY;
+        this.salaryCcyCode= INT_EMPTY;
+        this.createTime = STRING_EMPTY;
+        this.updateTime = STRING_EMPTY;
+        
+    }
+
+    /* isEmpty method */
+    public boolean isEmpty() {
+        // Only check Brief infos
+        return id == INT_EMPTY 
+            && title == STRING_EMPTY 
+            && company == STRING_EMPTY 
+            && duration == INT_EMPTY 
+            && country == STRING_EMPTY 
+            && applicationCloseDate == STRING_EMPTY;
+    }
+
+    /* Setters and Getters */
     public String getApplicationCloseDate() {
         return applicationCloseDate;
     }
@@ -178,41 +247,6 @@ public class Opportunity implements Serializable {
         this.visaType = visaType;
     }
 
-    /* Brief */
-    private int id;
-    private String title;
-    private String company;
-    private int duration;
-    private String country;
-    private String applicationCloseDate;
-
-    /* Details */
-    private int views;
-    private String homeLC;
-    private List<Manager> managers = new ArrayList<Manager>();
-    private List<Skill> skills = new ArrayList<Skill>();
-    private List<Background> backgrounds = new ArrayList<Background>();
-    private String visaLink;
-    private String visaType;
-    private String visaDuration;
-    private String city;
-    private String selectProcess;
-    private int salary;
-    private String salaryCcy;
-    private int salaryCcyCode;
-    private String createTime;
-    private String updateTime;
-
-    public boolean isEmpty() {
-        // Only check Brief infos
-        return id == 0
-                && title == null
-                && company == null
-                && duration == 0
-                && country == null
-                && applicationCloseDate == null;
-    }
-
     public static class Manager {
 
         private String fullName;
@@ -237,6 +271,11 @@ public class Opportunity implements Serializable {
     }
 
     public static class Skill {
+
+        private String name;
+        private String option;
+        private int level;
+
         public int getLevel() {
             return level;
         }
@@ -261,13 +300,12 @@ public class Opportunity implements Serializable {
             this.option = option;
         }
 
-        private String name;
-        private String option;
-        private int level;
     }
 
     public static class Background {
+
         private String name;
+        private String option;
 
         public String getOption() {
             return option;
@@ -285,7 +323,6 @@ public class Opportunity implements Serializable {
             this.name = name;
         }
 
-        private String option;
     }
 
 }
