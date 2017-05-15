@@ -58,8 +58,6 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
         ((TextView)findViewById(R.id.text_duration)).setText(duration);
         ((TextView)findViewById(R.id.text_application_close_date)).setText(applicationCloseDate);
         
-        setAllDetailViewsText("Loading...");
-
         final LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(OPPS_LOADER, null, OpportunityActivity.this);
         
@@ -86,6 +84,10 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Opportunity> onCreateLoader(int id, Bundle args) {
         Log.v("MylesDebug", "Opportunity: onCreateLoader");
+
+        /* Set result empty */
+        setAllDetailViewsText("Loading...");
+
         URL searchUrl = null;
         try {
             searchUrl = new URL(GIS_API_URL_PREFIX + this.mId + GIS_API_URL_SUFFIX);

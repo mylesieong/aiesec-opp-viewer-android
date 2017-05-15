@@ -58,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((Button) this.findViewById(R.id.button_gep)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                /* set empty view before laod */
+                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
                 MainActivity.this.mInLoadIndicator = GEP_IN_LOAD;
+                Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
                     loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
                 }else{
@@ -71,7 +74,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((Button) this.findViewById(R.id.button_us)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                /* set empty view before laod */
+                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
                 MainActivity.this.mInLoadIndicator = US_IN_LOAD;
+                Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
                     loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
                 }else{
@@ -84,7 +90,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((Button) this.findViewById(R.id.button_ca)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                /* set empty view before laod */
+                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
                 MainActivity.this.mInLoadIndicator = CA_IN_LOAD;
+                Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
                     loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
                 }else{
@@ -97,7 +106,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((Button) this.findViewById(R.id.button_developer)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                /* set empty view before laod */
+                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
                 MainActivity.this.mInLoadIndicator = DEV_IN_LOAD;
+                Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
                     loaderManager.initLoader(OPPS_LOADER, null, MainActivity.this);
                 }else{
@@ -123,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ((SwipeRefreshLayout) this.findViewById(R.id.swiperefresh)).setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                /* set empty view before laod */
+                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
                 Log.v("MylesDebug", "onRefresh called from SwipeRefreshLayout");
                 loaderManager.getLoader(OPPS_LOADER).forceLoad();
             }
@@ -133,8 +147,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<Opportunity>> onCreateLoader(int id, Bundle args) {
         Log.v("MylesDebug", "onCreateLoader");
-        ((ListView) this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
-        Toast.makeText(this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
         /* Debug: assumne id = OPPS_LOADER so no chekcing */
         URL searchUrl = null;
         try {
