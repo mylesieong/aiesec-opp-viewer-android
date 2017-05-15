@@ -38,6 +38,10 @@ public class Opportunity implements Serializable {
     private int salaryCcyCode;
     private String createTime;
     private String updateTime;
+    //newly add 3 fields
+    private String description;
+    private String preparation;
+    private String additional;
 
     /* Constructor */
     public Opportunity(){
@@ -245,6 +249,31 @@ public class Opportunity implements Serializable {
 
     public void setVisaType(String visaType) {
         this.visaType = visaType;
+    }
+
+    //newly add 3 fields setters/getters
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(String preparation ) {
+        this.preparation = preparation;
+    }
+
+    public String getAdditional() {
+        return additional;
+    }
+
+    public void setAdditional(String additional) {
+        this.additional = additional;
     }
 
     public static class Manager {

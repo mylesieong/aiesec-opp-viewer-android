@@ -146,6 +146,10 @@ public class OpportunityActivity extends AppCompatActivity implements LoaderMana
             ((TextView)findViewById(R.id.text_salary_ccy_code)).setText(String.valueOf(opportunity.getSalaryCcyCode()));
             ((TextView)findViewById(R.id.text_create_time)).setText(opportunity.getCreateTime());
             ((TextView)findViewById(R.id.text_update_time)).setText(opportunity.getUpdateTime());
+            //new description, preparation & addtional
+            ((TextView)findViewById(R.id.text_description)).setText(opportunity.getDescription());
+            ((TextView)findViewById(R.id.text_preparation)).setText(opportunity.getPreparation());
+            ((TextView)findViewById(R.id.text_additional)).setText(opportunity.getAdditional());
 
             ((TextView)findViewById(R.id.text_managers)).setText(opportunity.getHomeLC());
             ((TextView)findViewById(R.id.text_skills)).setText(opportunity.getHomeLC());

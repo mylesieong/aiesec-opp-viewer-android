@@ -101,6 +101,20 @@
             android:layout_height="2dip"
             android:background="#FF909090" />
         
+        <!-- description -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Description:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_description"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
         <!-- views -->
         <TableRow>
             <TextView
@@ -226,6 +240,35 @@
                 android:textColor="@android:color/black"
                 android:padding="3dp" />
         </TableRow>
+
+        <!-- preparation -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Preparation:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_preparation"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
+        <!-- additional instruction -->
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:text="Additional:"
+                android:padding="3dp" />
+            <TextView
+                android:id="@+id/text_additional"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp" 
+                android:textColor="@android:color/black"
+                android:padding="3dp" />
+        </TableRow>
+
 
         <!-- SelectProcess  -->
         <TableRow>
