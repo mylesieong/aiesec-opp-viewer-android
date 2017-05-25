@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String GIS_API_URL_GEP = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters%5Bis_gep%5D=true&per_page=1000&only=data";
     private static final String GIS_API_URL_US = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1621&filters[programmes][]=2&per_page=1000&only-data";
     private static final String GIS_API_URL_CA = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&filters[home_mcs][]=1554&filters[programmes][]=2&per_page=1000&only-data";
-    private static final String GIS_API_URL_DEV = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&q=developer&per_page=1000&only=data";
+    //private static final String GIS_API_URL_DEV = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&q=developer&per_page=1000&only=data";
+    private static final String GIS_API_URL_DEV = "https://gis-api.aiesec.org/v2/opportunities.json?access_token=e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493&q=developer&per_page=200&filters[programmes][]=2";
                         
     private int mInLoadIndicator;
     
