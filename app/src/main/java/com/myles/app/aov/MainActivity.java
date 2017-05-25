@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View arg0) {
                 /* set empty view before laod */
-                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+                clearList();
                 MainActivity.this.mInLoadIndicator = GEP_IN_LOAD;
                 Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View arg0) {
                 /* set empty view before laod */
-                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+                clearList();
                 MainActivity.this.mInLoadIndicator = US_IN_LOAD;
                 Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View arg0) {
                 /* set empty view before laod */
-                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+                clearList();
                 MainActivity.this.mInLoadIndicator = CA_IN_LOAD;
                 Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View arg0) {
                 /* set empty view before laod */
-                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+                clearList();
                 MainActivity.this.mInLoadIndicator = DEV_IN_LOAD;
                 Toast.makeText(MainActivity.this, "start load:" + getInLoadItemName(), Toast.LENGTH_SHORT).show();
                 if ( loaderManager.getLoader(OPPS_LOADER) == null ){
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onRefresh() {
                 /* set empty view before laod */
-                ((ListView) MainActivity.this.findViewById(R.id.list)).setEmptyView((TextView) findViewById(R.id.empty_view));
+                clearList();
                 Log.v("MylesDebug", "onRefresh called from SwipeRefreshLayout");
                 loaderManager.getLoader(OPPS_LOADER).forceLoad();
             }
@@ -243,6 +245,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             itemName = "DEV";
         }
         return itemName;
+    }
+
+    private void clearList(){
+        ((ListView)MainActivity.this.findViewById(R.id.list)).setAdapter(new OpportunityAdapter(MainActivity.this, new ArrayList<Opportunity>()));
     }
 
 }
